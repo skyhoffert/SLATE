@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RC Network</title>
+<script src="../slate-circuit-lib.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<script>
+  const c = new Circuit(400, 180);
+
+  const src = c.dcVSource(50, 100, {
+    label: 'V_S',
+    side: 'left',
+    anchor: 'middle',
+    labelGap: 30,
+    fontSize: 18,
+  });
+
+  const r1 = c.resistor(120, 30, {
+    rotate: 0,
+    label: 'R_1',
+    labelGap: 16,
+    fontSize: 18,
+  });
+
+  const r2 = c.resistor(200, 75, {
+    rotate: 90,
+    label: 'R_2',
+    labelGap: -20,
+    fontSize: 18,
+  });
+  
+  const c1 = c.capacitor(200, 135, {
+    rotate: 90,
+    label: 'C_1',
+    labelGap: -26,
+    fontSize: 18,
+  });
+  
+  const r3 = c.resistor(300, 95, {
+    rotate: 90,
+    label: 'R_3',
+    labelGap: -20,
+    fontSize: 18,
+  });
+
+  const viaPt = { x: 100, y: 170 };
+  c.wire(src.top, r1.left, { bend: 'v' });
+  c.wire(r1.right, r2.top);
+  c.wire(r2.bottom, c1.top);
+  c.wire(r1.right, r3.top);
+  c.wire(c1.bottom, viaPt, {bend:'v'});
+  c.wire(src.bottom, viaPt, {bend:'v'});
+  c.wire(r3.bottom, viaPt, {bend:'v'});
+
+  c.render(document.body);
+</script>
+</body>
+</html>

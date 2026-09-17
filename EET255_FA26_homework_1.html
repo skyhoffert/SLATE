@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EET 255 - Homework 1</title>
+<link rel="stylesheet" href="slate-shared.css">
+<script src="slate-shared.js" defer></script>
+</head>
+<body>
+
+<slate-doc>
+
+
+
+  <!-- ### HEADER ### -->
+  <slate-header>
+    <div class="slate-header-top">
+      <span>EET 255 &ndash; FA26</span>
+      <span>Homework 1</span>
+    </div>
+    <div class="slate-header-title">Homework 1</div>
+    <div class="slate-header-fields">
+      <span>Name: <span class="slate-field-line">&nbsp;</span></span>
+      <span>Date: <span class="slate-field-line">&nbsp;</span></span>
+    </div>
+  </slate-header>
+
+
+
+  <!-- ### INSTRUCTIONS ### -->
+  <slate-boxnote label="Instructions">
+    <strong><u>To receive credit</u></strong>: You may submit via hard copy or electronically via the Canvas submission portal.
+    All work must be neat and readable. If submitting via hard copy, be sure to include this sheet with
+    any additional work sheets you may have created. <strong><u>Show all work</u></strong> where applicable.
+    <br><br>
+    You will be graded on <u>proper significant figures</u> (sig figs) for all answers.
+  </slate-boxnote>
+
+
+
+  <!-- ### QUESTION 1 ### -->
+  <slate-question points="24">
+    Here are values from measurements of the paperclip from your first Lab, the Micrometer Lab. You
+    will do some basic statistical analysis of these values. <span class="slate-note">Use proper sig figs.</span>
+
+    <table class="slate-table">
+      <tr>
+        <th>No.</th>
+        <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+        <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+      </tr>
+      <tr>
+        <th scope="row">Value&emsp;( x<sub>i</sub> )</th>
+        <td>.0315"</td><td>.0316"</td><td>.0241"</td><td>.0280"</td><td>.0311"</td>
+        <td>.0320"</td><td>.0330"</td><td>.0297"</td><td>.0297"</td><td>.0296"</td>
+      </tr>
+    </table>
+
+    Let's calculate the mean (average). Follow these steps.
+
+    <slate-subquestion>
+      (number of samples)&emsp;N = <slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+    <slate-subquestion>
+      (sum of values)&emsp;&Sigma; x<sub>i</sub> = <slate-blank width="2in"></slate-blank>
+      <br>&emsp;&emsp;&emsp;&Sigma;&emsp;(Sigma) indicates the sum of <u>all</u> values, where each value is x<sub>i</sub> , meaning x<sub>1</sub> , x<sub>2</sub> , ... , x<sub>10</sub> .
+    </slate-subquestion>
+    <slate-subquestion>
+      (mean)&emsp;&mu; =
+      <span class="slate-frac"><span class="slate-frac-num">&Sigma; x<sub>i</sub></span><span class="slate-frac-den">N</span></span>
+      = <span class="slate-hspace" style="width:3in;"></span> = <slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+
+    Another measure of "the middle" value in a data set, other than mean, is median. Follow these steps to find it.
+
+    <slate-subquestion>
+      Organize the values from smallest value in position 1 to largest value in position 10. Note that this data set will use the "y" variable for indexing since it is different than the "x" data set.
+    </slate-subquestion>
+
+    <table class="slate-table">
+      <tr>
+        <th>No.</th>
+        <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+        <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+      </tr>
+      <tr>
+        <th scope="row">Sorted ( y<sub>i</sub> )</th>
+        <td></td><td></td><td></td><td></td><td></td>
+        <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+    </table>
+
+    <slate-subquestion>
+      (minimum, y<sub>1</sub>)&emsp;Min = <slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      (maximum, y<sub>10</sub>)&emsp;Max = <slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+
+    Typically the median would be the value in the middle of the data set (e.g. the 5th of 9 values). In a data set with an even number of values you take the average (mean) of the two middle values.
+
+    <slate-subquestion>
+      (median)&emsp;Med = <span class="slate-frac"><span class="slate-frac-num">y<sub>5</sub> + y<sub>6</sub></span><span class="slate-frac-den">2</span></span> = <slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+
+    Next you will calculate the standard deviation. Standard deviation is a measure of how "spread out" the data is from the mean. Go back to the "x" data set. Follow these steps.
+
+    <slate-subquestion>
+      (deviation, from the mean)&emsp;d<sub>i</sub> = x<sub>i</sub> - &mu;&emsp;&mdash;&emsp;Fill out the table below for each sample number.
+    </slate-subquestion>
+
+    <slate-subquestion>
+      (deviation squared)&emsp;d<sub>i</sub><sup>2</sup> = (x<sub>i</sub> - &mu;)<sup>2</sup>&emsp;&mdash;&emsp;Fill out the table below for each sample number.
+    </slate-subquestion>
+
+    <table class="slate-table">
+      <tr>
+        <th>No.</th>
+        <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+        <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+      </tr>
+      <tr>
+        <th scope="row">Dev.&emsp;( d<sub>i</sub> )</th>
+        <td></td><td></td><td></td><td></td><td></td>
+        <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row">Dev.<sup>2</sup>&emsp;( d<sub>i</sub><sup>2</sup> )</th>
+        <td></td><td></td><td></td><td></td><td></td>
+        <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+    </table>
+
+    <slate-subquestion>
+      (sum of squared deviations)&emsp;&Sigma; d<sub>i</sub><sup>2</sup> = &Sigma; (x<sub>i</sub> - &mu;)<sup>2</sup>
+      = <slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      (variance)&emsp;&sigma;<sup>2</sup> = <span class="slate-frac"><span class="slate-frac-num">&Sigma; d<sub>i</sub><sup>2</sup></span><span class="slate-frac-den">N</span></span>
+      = <span class="slate-hspace" style="width:2.5in;"></span> = <slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      (standard deviation)&emsp;&sigma; = <span class="slate-radical">&sigma;<sup>2</sup></span>&nbsp;
+      = <span class="slate-radical"><span class="slate-frac"><span class="slate-frac-num">&Sigma; d<sub>i</sub><sup>2</sup></span><span class="slate-frac-den">N</span></span></span>
+      = <span class="slate-hspace" style="width:1.5in;"></span> = <slate-blank width="1.6in"></slate-blank>
+    </slate-subquestion>
+
+    You may have heard of an "outlier" before. Let's analyze for outliers.
+
+    <slate-subquestion>
+      (lower bound of first standard deviation) &mu; - &sigma; = <slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      (upper bound of first standard deviation) &mu; + &sigma; = <slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+
+    We will call values in this range "not deviating from the mean" : [&mu; - &sigma; , &mu; + &sigma;]. Anything outside this range is what we call "deviating from the mean".
+
+    <slate-subquestion>
+      Do any samples <u>deviate from the mean</u>? If so, which one(s)?<slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+
+    An outlier is typically a value that is <strong>2 or 3</strong> standard deviations away from the mean.
+
+    <slate-subquestion>
+      Are there any outliers in this data set? If so, which one(s)? <slate-blank width="2in"></slate-blank>
+    </slate-subquestion>
+  </slate-question>
+
+
+
+  <!-- ### QUESTION 2 ### -->
+  <slate-question points="10">
+    You are given measured resistors R1 and R2 in the series circuit below. Your voltage source V<sub>S</sub> is given as fixed DC Voltage. Calculate the following values. <span class="slate-note">Use proper sig figs.</span>
+
+    <slate-space height="0.2in"></slate-space>
+
+    <slate-answer-row>
+      <slate-diagram> <!-- Use "<slate-diagram debug>" to see border. -->
+        <iframe src="diagrams/voltage_divider.html" style="width:100%; max-width:300px; aspect-ratio:300/180;"
+                scrolling="no" title="Series circuit: 12 V source, R1, and R2"></iframe>
+      </slate-diagram>
+    </slate-answer-row>
+
+    <slate-space height="0.4in"></slate-space>
+
+    <slate-subquestion>
+      Total current (no loading effect):&emsp;I<sub>S</sub> =
+      <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      Voltage across R2 (no loading effect):&emsp;V<sub>R2</sub> =
+      <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      Draw onto the circuit above considering the loading effect using a DMM to measure V<sub>R2</sub>. Assume the DMM has a 10 M&Omega; internal impedance.
+    </slate-subquestion>
+
+    <slate-subquestion>
+      Total current (<strong>with</strong> loading effect):&emsp;I<sub>S</sub> =
+      <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      Voltage across R2 (<strong>with</strong> loading effect):&emsp;V<sub>R2</sub> =
+      <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      Current through the DMM:&emsp;I<sub>DMM</sub> =
+      <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      Percent Voltage change due to loading effect: &emsp;V diff % =
+      <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      Percent Current change due to loading effect: &emsp;I diff % =
+      <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+  </slate-question>
+
+
+
+  <!-- ### QUESTION 3 ### -->
+  <slate-question points="2">
+    Based on the previous question, can you think of a way to measure the voltage across R2 without producing as much error?
+    <slate-freeform lines="3"></slate-freeform>
+  </slate-question>
+
+
+
+  <!-- ### QUESTION 4 ### -->
+  <slate-question points="8">
+    For small resistances, test leads have a non-negligible impact on Ohmmeter measurements. The circuit below is showing a typical Ohmmeter connection setup when measuring a resistance R<sub>X</sub>. Using the following circuit, answer these questions.<span class="slate-note">Use proper sig figs.</span>
+    <br>
+    &bull; I<sub>S</sub> is a fixed, stable, current source of 100 mA. The Voltmeter has internal impedance of 10 M&ohm;.
+    <br>
+    &bull; Your Voltmeter shows a measurement of&emsp;<strong>8.84 V</strong>&emsp;(depicted as the square with "V" in the circuit).
+
+    <slate-answer-row>
+      <slate-diagram> <!-- Use "<slate-diagram debug>" to see border. -->
+        <iframe src="diagrams/twowire_resistance_measurement.html" style="width:320px; max-width:100%; aspect-ratio:400/200;"
+                scrolling="no" title="Series circuit: 12 V source, R1, and R2"></iframe>
+      </slate-diagram>
+    </slate-answer-row>
+
+    <slate-space height="0.5in"></slate-space>
+
+    <slate-subquestion>
+      Calculate V<sub>R<sub>X</sub></sub> = <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      Calculate R<sub>X</sub> = <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      Calculate percent Voltage change due to lead resistance: &emsp;V diff % =
+      <slate-blank width="1in"></slate-blank>
+    </slate-subquestion>
+
+    <slate-subquestion>
+      Is the DMM Voltmeter internal impedance negligible? <slate-blank width="1in"></slate-blank>
+    </slate-subquestion>
+  </slate-question>
+
+
+
+  <!-- ### QUESTION 5 ### -->
+  <slate-question points="6">
+    Now consider a four-wire resistance measurement in the Ohmmeter measurement circuit below.
+    <br>
+    &bull; Voltmeter shows&emsp;<strong>8.84 V</strong>&emsp;and has infinite internal resistance. All leads have resistance of 0.5 &ohm;
+
+    <slate-answer-row>
+      <slate-answer-col>
+      <slate-diagram> <!-- Use "<slate-diagram debug>" to see border. -->
+        <iframe src="diagrams/fourwire_resistance_measurement.html" style="width:320px; max-width:100%; aspect-ratio:400/200;"
+                scrolling="no" title="Series circuit: 12 V source, R1, and R2"></iframe>
+      </slate-diagram>
+      </slate-answer-col>
+      <slate-answer-col>
+        <slate-subquestion>
+          Calculate V<sub>R<sub>Y</sub></sub> = <slate-blank width="1.5in"></slate-blank>
+        </slate-subquestion>
+
+        <slate-subquestion>
+          Calculate R<sub>Y</sub> = <slate-blank width="1.5in"></slate-blank>
+        </slate-subquestion>
+
+        <slate-subquestion>
+          Calculate percent difference between this R<sub>Y</sub> and R<sub>X</sub> from the previous question.
+          <br>
+          R diff % = <slate-blank width="1.5in"></slate-blank>
+        </slate-subquestion>
+      </slate-answer-col>
+    </slate-answer-row>
+
+    <slate-space height="0.7in"></slate-space>
+  </slate-question>
+
+
+
+  <!-- ### SCORE ### -->
+  <slate-score></slate-score>
+
+</slate-doc>
+
+</body>
+</html>

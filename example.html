@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slate Element Reference</title>
+<link rel="stylesheet" href="slate-shared.css">
+<script src="slate-shared.js" defer></script>
+</head>
+<body>
+
+<slate-doc>
+
+
+
+  <!--
+    ### HEADER ###
+    slate-header: title block at the top of every assignment sheet.
+    Name/Date fields are just styled spans - fill them in by hand.
+  -->
+  <slate-header>
+    <div class="slate-header-top">
+      <span>EET 255 &ndash; FA26</span>
+      <span>Homework X</span>
+    </div>
+    <div class="slate-header-title">Homework X</div>
+    <div class="slate-header-fields">
+      <span>Name: <span class="slate-field-line">&nbsp;</span></span>
+      <span>Date: <span class="slate-field-line">&nbsp;</span></span>
+    </div>
+  </slate-header>
+
+
+
+  <!--
+    ### BOXNOTE ###
+    slate-boxnote: a labeled box. label attribute sets the heading text,
+    defaults to "Notes" when omitted (e.g. <slate-boxnote label="Instructions">).
+    Use <strong> (and <strong><u>...</u></strong> for bold+underline) to
+    emphasize key phrases like grading requirements.
+  -->
+  <slate-boxnote label="Instructions">
+    <strong><u>To receive credit</u></strong>: you may submit via hard copy or electronically via the
+    Canvas submission portal. All work must be neat and readable. <strong>Show all work</strong> where
+    applicable.
+  </slate-boxnote>
+
+
+
+  <!--
+    ### SECTION HEADER ###
+    slate-section: a standalone, single-line section marker, e.g.
+    <slate-section label="Objectives"></slate-section>. It is not a
+    wrapper - content that follows it is ordinary free-form HTML, up
+    until the next slate-section or the end of the document. Usable
+    anywhere, in any assignment type, as many times as needed.
+  -->
+  <slate-section label="Objectives"></slate-section>
+
+  <p>State what the student should be able to do after completing this assignment.</p>
+
+  <slate-section label="Equipment Needed"></slate-section>
+
+
+
+  <!--
+    ### CHECKLIST ###
+    slate-checklist + slate-check-item: a borderless, multi-column
+    checkbox grid, e.g. for an equipment list. cols="N" sets the column
+    count (default 2).
+  -->
+  <slate-checklist cols="2">
+    <slate-check-item>Example item one</slate-check-item>
+    <slate-check-item>Example item two</slate-check-item>
+    <slate-check-item>Example item three</slate-check-item>
+  </slate-checklist>
+
+
+
+  <!--
+    ### QUESTION: SINGLE BLANK ###
+    slate-question: the basic wrapper for every graded question.
+    - points="N" attribute -> auto-numbered as "1) (N pts) ..." by slate-shared.js
+    - slate-blank width="..." -> a fill-in-the-blank line; width accepts any
+      CSS length (in, px, %, ...). If width doesn't seem to apply, make
+      sure slate-shared.js is loaded - it sets both width and min-width.
+  -->
+  <slate-question points="3">
+    A single-blank question. What is Ohm's Law?
+    <slate-blank width="2in"></slate-blank>
+  </slate-question>
+
+
+
+  <!--
+    ### QUESTION: SUBQUESTIONS ###
+    slate-subquestion: lettered parts (a, b, c, ...) inside a question.
+    Auto-lettered by slate-shared.js. Use <sub>...</sub> / <sup>...</sup> for
+    inline math subscripts/superscripts, and &emsp; as a quick inline tab.
+  -->
+  <slate-question points="6">
+    A multi-part question with lettered subquestions and inline math notation.
+    <slate-subquestion>
+      What is the total voltage V<sub>S</sub> supplied by the source?
+      <slate-blank width="1.5in"></slate-blank> V
+    </slate-subquestion>
+    <slate-subquestion>
+      What is the total resistance R<sub>T</sub>?&emsp;R<sub>T</sub> =
+      <slate-blank width="1.5in"></slate-blank> &Omega;
+    </slate-subquestion>
+  </slate-question>
+
+
+
+  <!--
+    ### QUESTION: FREEFORM ###
+    slate-freeform: ruled lines for a written answer.
+    lines="N" controls how many ruled lines are drawn (default 3).
+  -->
+  <slate-question points="10">
+    A free-response question with ruled lines for the answer.
+    <slate-freeform lines="5"></slate-freeform>
+  </slate-question>
+
+
+
+  <!--
+    ### QUESTION: DIAGRAM ###
+    slate-diagram + slate-answer-row/slate-answer-col: circuit diagram
+    with side-by-side answer fields.
+    - slate-diagram wraps an <iframe> that embeds a self-contained file from
+      diagrams/ (built with slate-circuit-lib.js - see diagrams/fourwire_resistance_measurement.html
+      for a worked example of resistor/dcVSource/wire/label usage).
+    - Add a debug attribute (<slate-diagram debug>) to show the diagram's
+      bounding box border while you're tuning layout/coordinates.
+    - Wrapping the diagram and subquestions in slate-answer-row +
+      slate-answer-col puts the diagram on the left and a right-hand column
+      of subquestions next to it (wraps to one column on narrow widths).
+      Omit the wrapper and just use slate-diagram on its own for a diagram
+      that's centered above full-width subquestions instead.
+  -->
+  <slate-question points="8">
+    A question with a circuit diagram and answers laid out beside it.
+
+    <slate-answer-row>
+      <slate-diagram>
+        <iframe src="diagrams/fourwire_resistance_measurement.html" style="width:100%; max-width:300px; aspect-ratio:300/180;"
+                scrolling="no" title="Example series circuit"></iframe>
+      </slate-diagram>
+
+      <slate-answer-col>
+        <slate-subquestion>
+          Total current (I):
+          <slate-blank width="1.5in"></slate-blank> A
+        </slate-subquestion>
+        <slate-subquestion>
+          Total resistance (R):
+          <slate-blank width="1.5in"></slate-blank> &Omega;
+        </slate-subquestion>
+      </slate-answer-col>
+    </slate-answer-row>
+  </slate-question>
+
+
+
+  <!--
+    ### QUESTION: EXTRA SPACE ###
+    slate-space: manual extra vertical gap.
+    Drop this between slate-question blocks (or anywhere) when the default
+    question spacing isn't enough - e.g. to leave room for hand-drawn work.
+    height defaults to 0.3in if omitted.
+  -->
+  <slate-question points="2">
+    A short question, followed by extra breathing room before the next one.
+  </slate-question>
+
+  <slate-space height="0.75in"></slate-space>
+
+  <slate-question points="2">
+    Another question, placed after the extra gap above.
+  </slate-question>
+
+
+
+  <!--
+    ### SCORE ###
+    slate-score: auto-computed total of every slate-question points="N" on the
+    page. Just drop it once at the end of the sheet.
+  -->
+  <slate-score></slate-score>
+
+</slate-doc>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Four-Wire Resistance Measurement</title>
+<script src="../slate-circuit-lib.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<script>
+  const c = new Circuit(400, 300);
+
+  const vmeter = c.VMeter(250, 110, {
+    label: '',
+    fontSize: 18,
+    //polarityOffset: 10,
+  });
+
+  const isrc = c.dcISource(300, 110, {
+    label: 'I_S',
+    value: '100 mA',
+    side: 'right',
+    anchor: 'middle',
+    labelGap: 50,
+    labelLineHeight: 22,
+    fontSize: 18,
+  });
+
+  const rLead1 = c.resistor(150, 30, {
+    rotate: 0,
+    label: 'R_{Lead1}',
+    labelGap: 16,
+    fontSize: 18,
+  });
+  
+  const rLead2 = c.resistor(150, 70, {
+    rotate: 0,
+    label: 'R_{Lead2}',
+    labelGap: 16,
+    fontSize: 18,
+  });
+
+  const rLead3 = c.resistor(150, 150, {
+    rotate: 0,
+    label: 'R_{Lead3}',
+    labelGap: 16,
+    fontSize: 18,
+  });
+  
+  const rLead4 = c.resistor(150, 190, {
+    rotate: 0,
+    label: 'R_{Lead4}',
+    labelGap: 16,
+    fontSize: 18,
+  });
+  
+  const rY = c.resistor(50, 110, {
+    rotate: -90,
+    label: 'R_{Y}',
+    labelGap: 28,
+    fontSize: 18,
+  });
+
+  c.wire(rY.top, rLead1.left, {bend:'v'});
+  c.wire(rLead1.right, isrc.top);
+  
+  c.wire(rY.top, rLead2.left, {bend:'v'});
+  c.wire(rLead2.right, vmeter.top);
+
+  c.wire(rY.bottom, rLead3.left, {bend:'v'});
+  c.wire(rY.bottom, rLead4.left, {bend:'v'});
+
+  c.wire(rLead3.right, vmeter.bottom);
+  c.wire(rLead4.right, isrc.bottom);
+
+  c.dashedBox(310, 110, 170, 178);
+
+  c.text(355, 35, "Ohmmeter");
+
+  // c.wire(r1.left, vmeter.top, { bend: 'v' });
+  // c.wire(vmeter.top, isrc.top);
+  // c.wire(r1.right, r2.top);
+  // const viaPt = { x: 200, y: 170 };
+  // c.wire(r2.bottom, viaPt, { bend: 'v' });
+  // c.wire(viaPt, vmeter.bottom);
+  // c.wire(vmeter.bottom, isrc.bottom);
+
+  c.render(document.body);
+</script>
+</body>
+</html>

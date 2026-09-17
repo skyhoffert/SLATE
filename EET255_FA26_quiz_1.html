@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EET 255 - Quiz 1</title>
+<link rel="stylesheet" href="slate-shared.css">
+<script src="slate-shared.js" defer></script>
+</head>
+<body>
+
+<slate-doc>
+
+
+
+  <!-- ### HEADER ### -->
+  <slate-header>
+    <div class="slate-header-top">
+      <span>EET 255</span>
+      <span>FA26</span>
+    </div>
+    <div class="slate-header-title">Quiz 1</div>
+    <div class="slate-header-fields">
+      <span>Name: <span class="slate-field-line">&nbsp;</span></span>
+      <span>Date: <span class="slate-field-line">&nbsp;</span></span>
+    </div>
+  </slate-header>
+
+
+
+  <!-- ### QUESTION 1 ### -->
+  <slate-question points="3">
+    Draw a <u>Voltmeter</u> connected to the circuit below, considering the <u>loading effect</u> AND <u>resistive test leads</u>, to measure the voltage across R<sub>2</sub>.
+    Label your resistances, but no need for <i>values</i>.
+
+    <slate-space height="0.1in"></slate-space>
+
+    <slate-answer-row>
+      <slate-diagram> <!-- Use "<slate-diagram debug>" to see border. -->
+        <iframe src="diagrams/rc_network.html" style="width:400px; aspect-ratio:400/180;"
+                scrolling="no" title="Series circuit: 12 V source, R1, and R2"></iframe>
+      </slate-diagram>
+    </slate-answer-row>
+
+    <slate-space height="0.4in"></slate-space>
+  </slate-question>
+
+
+
+  <!-- ### QUESTION 2 ### -->
+  <slate-question points="3">
+    Draw the circuit above again, this time with an <u>Ammeter</u> connected, considering the <u>loading effect</u> AND <u>resistive test leads</u>, to measure the current through R<sub>3</sub>.
+    Label your resistances, but no need for <i>values</i>.
+
+    <slate-space height="2.5in"></slate-space>
+  </slate-question>
+
+
+
+  <!-- ### QUESTION 3 ### -->
+  <slate-question points="1">
+    Five students use a micrometer to measure the diameter of a brass rod used in their robot, but they all get <i>slightly different</i> values.
+    Which statistics measure <u>best</u> describes why the measurements don't <i>exactly</i> match.
+
+    <slate-choices>
+      <slate-choice>mean</slate-choice>
+      <slate-choice>standard deviation</slate-choice>
+      <slate-choice>outliers</slate-choice>
+      <slate-choice>median</slate-choice>
+    </slate-choices>
+  </slate-question>
+
+
+
+  <!-- ### QUESTION 4 ### -->
+  <slate-question points="1">
+    Considering the question above &dash; some students tightened down their micrometer with the <u>thimble</u> last to ensure <i>firm</i> contact, but some used the <u>ratchet</u> last to <i>gently</i> clamp down on the rod.
+    Which is <i>better</i>?
+
+    <slate-choices>
+      <slate-choice>thimble</slate-choice>
+      <slate-choice>ratchet</slate-choice>
+    </slate-choices>
+  </slate-question>
+
+
+
+  <!-- ### SCORE ### -->
+  <slate-score></slate-score>
+
+</slate-doc>
+
+</body>
+</html>

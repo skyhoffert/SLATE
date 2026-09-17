@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Voltage Divider</title>
+<script src="../slate-circuit-lib.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<script>
+  const c = new Circuit(305, 180);
+
+  const src = c.dcVSource(70, 110, {
+    label: 'V_S',
+    value: '12.1 V',
+    side: 'left',
+    anchor: 'middle',
+    labelGap: 42,
+    labelLineHeight: 22,
+    fontSize: 18,
+  });
+
+  const r1 = c.resistor(140, 50, {
+    rotate: 0,
+    label: 'R1',
+    value: '472 kΩ',
+    labelGap: 24,
+    labelLineHeight: 22,
+    fontSize: 18,
+  });
+
+  const r2 = c.resistor(220, 110, {
+    rotate: 90,
+    label: 'R2',
+    value: '1.18 MΩ',
+    anchor: 'start',
+    labelGap: 16,
+    labelLineHeight: 22,
+    fontSize: 18,
+  });
+
+  c.wire(src.top, r1.left, { bend: 'v' });
+  c.wire(r1.right, r2.top);
+  const viaPt = { x: 200, y: 170 };
+  c.wire(r2.bottom, viaPt, { bend: 'v' });
+  c.wire(viaPt, src.bottom);
+
+  c.render(document.body);
+</script>
+</body>
+</html>
