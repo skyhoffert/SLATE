@@ -1,0 +1,38 @@
+#!/bin/sh
+# Bumps SLATE's version (slate-version.js) on every commit, and stamps every
+# staged assignment .html file (anything with a <slate-doc> tag) with the new
+# version so slate-shared.js can warn if a document goes stale later.
+# Activated once via: git config core.hooksPath .githooks
+
+set -e
+
+today=$(date +%Y%m%d)
+version_file="slate-version.js"
+
+current=$(grep -o "SLATE_VERSION = '[^']*'" "$version_file" | sed "s/SLATE_VERSION = '//;s/'//")
+current_date=$(echo "$current" | cut -d. -f1)
+current_n=$(echo "$current" | cut -d. -f2)
+
+if [ "$current_date" = "$today" ]; then
+  n=$((current_n + 1))
+else
+  n=0
+fi
+
+new_version="${today}.${n}"
+
+sed -i "s/SLATE_VERSION = '[^']*'/SLATE_VERSION = '${new_version}'/" "$version_file"
+git add "$version_file"
+
+for f in $(git diff --cached --name-only --diff-filter=ACM -- '*.html'); do
+  [ -f "$f" ] || continue
+  grep -q '<slate-doc' "$f" || continue
+
+  if grep -q '<meta name="slate-version"' "$f"; then
+    sed -i "s/<meta name=\"slate-version\" content=\"[^\"]*\">/<meta name=\"slate-version\" content=\"${new_version}\">/" "$f"
+  else
+    sed -i "s/<head>/<head>\n<meta name=\"slate-version\" content=\"${new_version}\">/" "$f"
+  fi
+
+  git add "$f"
+done

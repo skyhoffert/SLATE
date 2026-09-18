@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PTC Circuit with Ammeter</title>
+<script src="../slate-circuit-lib.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff;}
+  svg { display: block; }
+</style>
+</head>
+<body>
+<script>
+  const c = new Circuit(300, 150);
+
+  const vs = c.VSource(60, 50, {
+    label: 'V_S',
+    value: '24 V',
+    side: 'right',
+    anchor: 'middle',
+    labelGap: -35,
+    labelLineHeight: 22,
+    fontSize: 18,
+  });
+
+  const rPTC = c.thermistor(200, 50, {
+    rotate: 90,
+    label: 'R_{PTC}',
+    labelGap: 12,
+    fontSize: 18,
+  });
+  
+  const imeter = c.IMeter(125, 110, {
+    label: 'A',
+    fontSize: 18,
+    rotate: 90,
+    labelGap: 0,
+    polarityOffset: -10,
+  });
+
+  const topviapt = {x:100, y:10};
+  c.wire(vs.top, topviapt, {bend:'v'});
+  c.wire(rPTC.top, topviapt, {bend:'v'});
+  c.wire(rPTC.bottom, imeter.top, {bend:'v'});
+  c.wire(vs.bottom, imeter.bottom, {bend:'v'});
+
+  c.render(document.body);
+</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+{
+  "version": 1.1,
+  "tags": [
+    {
+      "name": "slate-doc",
+      "description": "Root wrapper for a single printable assignment sheet."
+    },
+    {
+      "name": "slate-header",
+      "description": "Title block at the top of the sheet (course/term, title, name/date fields)."
+    },
+    {
+      "name": "slate-boxnote",
+      "description": "A labeled box, e.g. for instructions or grading notes.",
+      "attributes": [
+        { "name": "label", "description": "Heading text for the box. Defaults to \"Notes\" when omitted." }
+      ]
+    },
+    {
+      "name": "slate-section",
+      "description": "Standalone single-line section marker, e.g. Objectives/Equipment/Procedure. Not a wrapper.",
+      "attributes": [
+        { "name": "label", "description": "Section heading text." }
+      ]
+    },
+    {
+      "name": "slate-question",
+      "description": "Wrapper for a single graded question. Auto-numbered by slate-shared.js.",
+      "attributes": [
+        { "name": "points", "description": "Point value, rendered as \"(N pts)\" and summed into slate-score." },
+        { "name": "class", "description": "Use \"slate-objective\" for unnumbered objective list items." }
+      ]
+    },
+    {
+      "name": "slate-subquestion",
+      "description": "Lettered part (a, b, c, ...) inside a slate-question. Auto-lettered by slate-shared.js."
+    },
+    {
+      "name": "slate-blank",
+      "description": "Fill-in-the-blank line. Do not append units after it - students must supply units themselves.",
+      "attributes": [
+        { "name": "width", "description": "Any CSS length (in, px, %, ...)." }
+      ]
+    },
+    {
+      "name": "slate-freeform",
+      "description": "Ruled lines for a free-response written answer.",
+      "attributes": [
+        { "name": "lines", "description": "Number of ruled lines to draw. Default 3." }
+      ]
+    },
+    {
+      "name": "slate-pagebreak",
+      "description": "Forces a real page break in print at this point in the document. No effect on screen, since screen isn't paginated."
+    },
+    {
+      "name": "slate-workspace",
+      "description": "Open bordered box for students to show their work. Spans the full width of its container - the page, or a slate-answer-col when nested inside one.",
+      "attributes": [
+        { "name": "height", "description": "Any CSS length, sets min-height. Default 1.5in." }
+      ]
+    },
+    {
+      "name": "slate-answer-row",
+      "description": "Lays a slate-diagram and slate-answer-col side by side (wraps on narrow widths)."
+    },
+    {
+      "name": "slate-answer-col",
+      "description": "Right-hand column of subquestions used inside slate-answer-row."
+    },
+    {
+      "name": "slate-diagram",
+      "description": "Wraps an iframe embedding a self-contained circuit diagram from diagrams/.",
+      "attributes": [
+        { "name": "debug", "description": "Shows the diagram's bounding box border while tuning layout." }
+      ]
+    },
+    {
+      "name": "slate-space",
+      "description": "Manual extra vertical gap between questions.",
+      "attributes": [
+        { "name": "height", "description": "Any CSS length. Default 0.3in." }
+      ]
+    },
+    {
+      "name": "slate-checklist",
+      "description": "Borderless multi-column checkbox grid, e.g. an equipment list.",
+      "attributes": [
+        { "name": "cols", "description": "Column count. Default 2." }
+      ]
+    },
+    {
+      "name": "slate-check-item",
+      "description": "Single checkbox row inside a slate-checklist."
+    },
+    {
+      "name": "slate-choices",
+      "description": "Row of multiple-choice options."
+    },
+    {
+      "name": "slate-choice",
+      "description": "Single option inside slate-choices."
+    },
+    {
+      "name": "slate-score",
+      "description": "Auto-computed total of every slate-question points=\"N\" on the page. Place once at the end."
+    },
+    {
+      "name": "slate-right",
+      "description": "Right-aligns a block, e.g. a labeled value line."
+    },
+    {
+      "name": "slate-eq",
+      "description": "Italic math font styling for a variable or equation. Inline by default; add style=\"display: block;\" to center a standalone equation line."
+    },
+    {
+      "name": "slate-eq-caption",
+      "description": "Centered caption line under a slate-eq or figure, e.g. naming the equation or spec table above it."
+    },
+    {
+      "name": "slate-frac",
+      "description": "Inline fraction. Wraps a slate-frac-num and slate-frac-den."
+    },
+    {
+      "name": "slate-frac-num",
+      "description": "Numerator of a slate-frac."
+    },
+    {
+      "name": "slate-frac-den",
+      "description": "Denominator of a slate-frac."
+    }
+  ]
+}

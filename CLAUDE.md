@@ -1,7 +1,11 @@
 # SLATE Homework Creator
 
-# General understanding
+# SLATE Specific Guidelines
+- Students are expected to put units for each answer - do not provide units as part of the question.
+
+# General Understanding
 - If my instructions are unclear, you can utilize the grilling skill to get a better understanding.
+- Issues can be found in ISSUES.md
 
 # Code Style
 - Sacrifice grammar for concise code.

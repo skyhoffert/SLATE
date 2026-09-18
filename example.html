@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="slate-version" content="20260918.1">
 <meta charset="UTF-8">
 <title>Slate Element Reference</title>
 <link rel="stylesheet" href="slate-shared.css">
+<script src="slate-version.js"></script>
 <script src="slate-shared.js" defer></script>
 </head>
 <body>
@@ -124,14 +126,42 @@
 
 
   <!--
+    ### QUESTION: WORKSPACE ###
+    slate-workspace: an open bordered box for showing work. Spans the full
+    width of its container - the page, or a slate-answer-col when nested
+    inside one. height attribute sets min-height (default 1.5in).
+  -->
+  <slate-question points="4">
+    A question with an open box for showing work.
+    <slate-workspace height="2in"></slate-workspace>
+  </slate-question>
+
+
+
+  <!--
+    ### PAGE BREAK (FORCED) ###
+    slate-pagebreak: forces a real page break in print at this point.
+    No effect on screen, since screen isn't paginated - use for a spot you
+    deliberately want split, e.g. before an appendix.
+  -->
+  <slate-pagebreak></slate-pagebreak>
+
+
+
+  <!--
     ### QUESTION: DIAGRAM ###
     slate-diagram + slate-answer-row/slate-answer-col: circuit diagram
     with side-by-side answer fields.
-    - slate-diagram wraps an <iframe> that embeds a self-contained file from
-      diagrams/ (built with slate-circuit-lib.js - see diagrams/fourwire_resistance_measurement.html
-      for a worked example of resistor/dcVSource/wire/label usage).
-    - Add a debug attribute (<slate-diagram debug>) to show the diagram's
-      bounding box border while you're tuning layout/coordinates.
+    - <slate-diagram src="diagrams/foo.html" width="2in"> embeds a
+      self-contained file from diagrams/ (built with slate-circuit-lib.js -
+      see diagrams/fourwire_resistance_measurement.html for a worked example
+      of resistor/VSource/wire/label usage). `width` picks the display size
+      (defaults to 320px); aspect ratio is handled automatically from a
+      registry in slate-shared.js (DIAGRAM_SIZES) - add a new diagram's
+      native `Circuit(w, h)` size there when you create the file.
+    - Add a debug attribute (<slate-diagram debug src="..." width="...">) to
+      show the diagram's bounding box border while you're tuning
+      layout/coordinates.
     - Wrapping the diagram and subquestions in slate-answer-row +
       slate-answer-col puts the diagram on the left and a right-hand column
       of subquestions next to it (wraps to one column on narrow widths).
@@ -142,10 +172,7 @@
     A question with a circuit diagram and answers laid out beside it.
 
     <slate-answer-row>
-      <slate-diagram>
-        <iframe src="diagrams/fourwire_resistance_measurement.html" style="width:100%; max-width:300px; aspect-ratio:300/180;"
-                scrolling="no" title="Example series circuit"></iframe>
-      </slate-diagram>
+      <slate-diagram src="diagrams/fourwire_resistance_measurement.html" width="300px"></slate-diagram>
 
       <slate-answer-col>
         <slate-subquestion>

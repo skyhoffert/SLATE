@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="slate-version" content="20260918.1">
 <meta charset="UTF-8">
 <title>EET 255 - Lab X</title>
 <link rel="stylesheet" href="slate-shared.css">
+<script src="slate-version.js"></script>
 <script src="slate-shared.js" defer></script>
 </head>
 <body>
@@ -18,7 +20,7 @@
       <span>EET 255</span>
       <span>FA26</span>
     </div>
-    <div class="slate-header-title">Lab X &dash; Temperature Measurement Sensors</div>
+    <div class="slate-header-title">Lab X &dash; Introduction to Temperature Sensors</div>
     <div class="slate-header-fields">
       <span>Name: <span class="slate-field-line">&nbsp;</span></span>
       <span>Date: <span class="slate-field-line">&nbsp;</span></span>
@@ -40,15 +42,19 @@
   <slate-section label="Objectives"></slate-section>
 
   <slate-question class="slate-objective">
-    Learn about various electronic temperature sensors
+    id sensor types, look/uses
   </slate-question>
 
   <slate-question class="slate-objective">
-    Measure uncalibrated temperatures using standard electronic equipment
+    measure raw uncalibrated signal (R or mV) from each
   </slate-question>
 
   <slate-question class="slate-objective">
-    Perform a four-wire resistance measurement to accurately measure temperature
+    convert raw reading to temp via calc
+  </slate-question>
+
+  <slate-question class="slate-objective">
+    2-wire vs 4-wire RTD, lead resistance error
   </slate-question>
 
 
@@ -59,19 +65,42 @@
   <slate-checklist cols="2">
     <slate-check-item>Negative Temperature Coefficient (NTC) Thermistor</slate-check-item>
     <slate-check-item>Positive Temperature Coefficient (PTC) Thermistor</slate-check-item>
-    <slate-check-item>Thermocouple (Type K)</slate-check-item>
+    <slate-check-item>Thermocouple (TC) - Type K</slate-check-item>
     <slate-check-item>Resistance Temperature Detector (RTD)</slate-check-item>
-    <slate-check-item>DMM</slate-check-item>
+    <slate-check-item>Crenova MS8233D DMM</slate-check-item>
     <slate-check-item>DC Power Supply</slate-check-item>
+    <slate-check-item>Oscilloscope</slate-check-item>
+    <slate-check-item>Soldering Iron</slate-check-item>
+    <slate-check-item>Two 10 &Omega; Resistors</slate-check-item>
   </slate-checklist>
 
 
-  
+
   <!-- ### INTRODUCTION ### -->
   <slate-section label="Introduction"></slate-section>
+  Temperature measurement is an important part of monitoring electro-mechanical systems. With a wide range of application for temperature measurement comes a wide range of temperature sensors to achieve different needs.
+  In today's lab, we will introduce common temperature sensors and look at how to convert their electrical measurement quantities to an actual temperature value.
+  <slate-space height="0.1in"></slate-space>
+  There are other measurement techniques, including non-contact methods like Infrared (IR), but they are out of scope for this class.
+  <slate-space height="0.1in"></slate-space>
+  <slate-choices>
+    <slate-choice><img src="images/TC_close.png" style="width:1.15in"><br>Thermocouple</slate-choice>
+    <slate-choice><img src="images/NTC_close.png" style="width:1.2in"><br>NTC Thermistor</slate-choice>
+    <slate-choice><img src="images/PTC_close.png" style="width:1.4in"><br>PTC Thermistor</slate-choice>
+    <slate-choice><img src="images/RTD_close.png" style="width:1.09in"><br>RTD</slate-choice>
+  </slate-choices>
 
-  TODO TODO TODO
+  <!-- COMMENTS 
+  <br>- sensor overview / comparison table (NTC, PTC, TC, RTD)
+  <br>- CJC concept note (thermocouple), no calc
+  <br>- part numbers / coefficients TODO
 
+  SLIDE DECK NOTES:
+  DMM specs again - explain UNCERTAINTY to include digit this time!
+  Explain TC junction generates voltage. WHY?
+  Explain "Ambient"
+  Show curve shapes
+  -->
 
 
   <!-- ### PROCEDURE ### -->
@@ -79,43 +108,231 @@
 
 
 
-  <!-- ### QUESTION 1 ### -->
-  <slate-question points="1">
-    <slate-subquestion>Measure a NTC with an ohmmeter. Hold finger on it and observe it moving.</slate-subquestion>
-    <slate-subquestion>Measure the NTC with the oscilloscope?</slate-subquestion>
+  <!-- ### QUESTION 1: THERMOCOUPLE ### -->
+  <slate-question points="0">
+    Let's start with the <strong>Thermocouple (TC)</strong>. Thermocouples are very common in consumer and industrial electronics, especially for high temperature applications.
+    TCs are known for their extreme temperature range and fast response time. They are also typically better for harsh environments. TCs output a small voltage, in the 10s of millivolts range.
+    <slate-subquestion>
+      Use your DMM to measure the voltage of your TC at ambient (room temperature).
+      <slate-right>TC Ambient Voltage&emsp;V<sub>TC (ambient)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+    </slate-subquestion>
+    <slate-subquestion>
+      Using your DMM's datasheet DC voltage accuracy spec below, calculate the measurement uncertainty on the ambient reading above.
+      <slate-answer-row style="margin-top: 0.05in;">
+        <div style="width:300px; max-width:100%; text-align: center;">
+          <table class="slate-table" style="margin:0;">
+            <tr><th>Range</th><th>Resolution</th><th>Accuracy</th></tr>
+            <tr><td>200mV</td><td>0.1mV</td><td>&plusmn; (0.5% rdg + 2dgt)</td></tr>
+          </table>
+          <slate-eq-caption>MS8233D DC Voltage spec.</slate-eq-caption>
+        </div>
+        <slate-answer-col style="margin-top: 0.2in;">
+          <slate-right>Uncertainty&emsp;&plusmn;<slate-blank width="1.2in"></slate-blank></slate-right>
+          <slate-right>Range&emsp;<slate-blank width="1.2in"></slate-blank> to <slate-blank width="1.2in"></slate-blank></slate-right>
+        </slate-answer-col>
+      </slate-answer-row>
+    </slate-subquestion>
+    <slate-subquestion>
+      Pinch the thermocouple between your fingers for a few seconds while reading with DMM. Record the peak voltage that the TC rises to.
+      It will begin to level off and then fall back down once you let go of it.
+      <slate-right>TC Warm Voltage&emsp;V<sub>TC (warm)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+    </slate-subquestion>
+    <slate-subquestion>
+      Now we will convert the voltages measured to temperatures. We will start with lookup table conversion.
+      Round your voltages measured to the closest &deg;C in the lookup table provided in Appendix A.
+      
+      <slate-right>TC Ambient Temperature&emsp;T<sub>TC (ambient)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+      <slate-right>TC Warm Temperature&emsp;T<sub>TC (warm)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+    </slate-subquestion>
+    <slate-subquestion>
+      Now we will convert with one more digit using a linear interpolation. Use this formula to compute with 0.1 &deg;C precision.
+      <slate-eq>T<sub>1</sub></slate-eq> ,
+      <slate-eq>T<sub>2</sub></slate-eq> ,
+      <slate-eq>V<sub>1</sub></slate-eq> ,
+      <slate-eq>V<sub>2</sub></slate-eq>
+      are the two points around your measurement <slate-eq>V</slate-eq>.
+
+      <slate-eq style="display: block; text-align: center;">
+        T = T<sub>1</sub> + (V &minus; V<sub>1</sub>) &times;
+        <slate-frac>
+          <slate-frac-num>T<sub>2</sub> &minus; T<sub>1</sub></slate-frac-num>
+          <slate-frac-den>V<sub>2</sub> &minus; V<sub>1</sub></slate-frac-den>
+        </slate-frac>
+      </slate-eq>
+      <slate-eq-caption>Interpolation formula.</slate-eq-caption>
+      <slate-workspace height="2in"></slate-workspace>
+
+      <slate-right>TC Ambient Temperature&emsp;T<sub>TC (ambient)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+      <slate-right>TC Warm Temperature&emsp;T<sub>TC (warm)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+    </slate-subquestion>
+    <slate-subquestion>
+      Now let's hook up the TC to an oscilloscope. Using a 10:1 probe, connect the TC so that it is measuring a positive voltage.
+      Set your time divisions so it captures a few seconds of TC behavior.
+      Capture the behavior of the TC for one cycle of pinching to warm it, and releasing to cool it.
+      Draw the general shape of your curve below, include only basic details &ndash; I'm looking for general curve shape.
+      <slate-workspace height="1.7in" style="width: 50%; margin-bottom:0;"></slate-workspace>
+      <slate-eq-caption>Heat-up/cool-down cycle with fingers.</slate-eq-caption>
+    </slate-subquestion>
+    <slate-subquestion>
+      Let's provide some control feedback to the TC. Attempt to hold the TC at a steady constant voltage <u>above</u> ambient, say 1 mV (25 &deg;C) using your fingers.
+      Are you able to do this? If so, draw your general cycle behavior curve here &ndash; again just looking for general shape.
+      <slate-workspace height="1.7in" style="width: 50%; margin-bottom:0;"></slate-workspace>
+      <slate-eq-caption>Feedback control with fingers.</slate-eq-caption>
+    </slate-subquestion>
+    <slate-subquestion>
+      Heat up your thermocouple with the hot air tool. Draw your curve shapes below.
+      Use the left box for general heat-up/cool-down cycle curve shape.
+      Use the right box for attempting to hold with control feedback at 5 mV (122 &deg;C).
+      <slate-answer-row style="margin-top: 0;">
+        <slate-answer-col style="text-align: center;">
+          <slate-workspace height="1.7in" style="margin-bottom:0;"></slate-workspace>
+          <slate-eq-caption>Heat-up/cool-down cycle with hot air.</slate-eq-caption>
+        </slate-answer-col>
+        <slate-answer-col style="text-align: center;">
+          <slate-workspace height="1.7in" style="margin-bottom:0;"></slate-workspace>
+          <slate-eq-caption>Feedback control cycle with hot air.</slate-eq-caption>
+        </slate-answer-col>
+      </slate-answer-row>
+    </slate-subquestion>
   </slate-question>
 
-  
 
-  <!-- ### QUESTION 2 ### -->
-  <slate-question points="1">
-    <slate-subquestion>Measure a PTC with an ohmmeter. Hold finger on it and observe it moving.</slate-subquestion>
-    <slate-subquestion>Hook it up to 24 V DC output directly, watch the current fall.</slate-subquestion>
+
+  <!-- ### QUESTION 2: NTC ### -->
+  <slate-question points="0">
+    The next sensor type is a <strong>Negative Temperature Coefficient (NTC) Thermistor</strong>.
+    Instead of measuring a voltage which corresponds to a temperature, thermistors are instead a variable resistor that changes with temperature.
+    Although NTC Thermistors are generally the cheapest temperature sensors, they can still be quite accurate when used correctly.
+    <slate-subquestion>
+      Use your DMM to measure your NTC thermistor's ambient resistance.
+      It should be about 10 k&ohm;.
+      <slate-right>NTC Thermistor Ambient Resistance&emsp;R<sub>NTC (ambient)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+    </slate-subquestion>
+    <slate-subquestion>
+      Using your DMM's datasheet resistance accuracy spec below, calculate the measurement uncertainty on the ambient reading above.
+      <slate-answer-row style="margin-top: 0.05in;">
+        <div style="width:300px; max-width:100%; text-align: center;">
+          <table class="slate-table" style="margin:0;">
+            <tr><th>Range</th><th>Resolution</th><th>Accuracy</th></tr>
+            <tr><td>20k&Omega;</td><td>0.01k&Omega;</td><td>&plusmn; (0.8% rdg + 2dgt)</td></tr>
+          </table>
+          <slate-eq-caption>MS8233D Resistance spec.</slate-eq-caption>
+        </div>
+        <slate-answer-col style="margin-top: 0.2in;">
+          <slate-right>Uncertainty&emsp;&plusmn;<slate-blank width="1.2in"></slate-blank></slate-right>
+          <slate-right>Range&emsp;<slate-blank width="1.2in"></slate-blank> to <slate-blank width="1.2in"></slate-blank></slate-right>
+        </slate-answer-col>
+      </slate-answer-row>
+    </slate-subquestion>
+    <slate-subquestion>
+      Pinch the NTC thermistor between your fingers for a few seconds while reading with DMM. Since NTC resistance decreases as temperature rises, record the minimum resistance it falls to.
+      It will begin to level off and then rise back up once you let go of it.
+      <slate-right>NTC Thermistor Warm Resistance&emsp;R<sub>NTC (warm)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+    </slate-subquestion>
+    <slate-subquestion>
+      Now we'll convert to temperature using the Beta parameter equation.
+      <slate-eq>R<sub>0</sub></slate-eq> and <slate-eq>T<sub>0</sub></slate-eq> are the thermistor's reference resistance and temperature, and <slate-eq>&beta;</slate-eq> is its Beta value &mdash; all given on the datasheet.
+      <br>
+      <slate-eq>R<sub>0</sub></slate-eq> = 10 k&ohm;, <slate-eq>T<sub>0</sub></slate-eq> = 25&deg;C, <slate-eq>&beta;</slate-eq> = 3950 K
+
+      <slate-eq style="display: block; text-align: center;">
+        T =
+        <slate-frac>
+          <slate-frac-num>1</slate-frac-num>
+          <slate-frac-den>1/T<sub>0</sub> + (1/&beta;) ln(R/R<sub>0</sub>)</slate-frac-den>
+        </slate-frac>
+        &minus; 273.15
+      </slate-eq>
+      <slate-eq-caption>Beta parameter equation (T, T<sub>0</sub> in Kelvin; subtract 273.15 for &deg;C)</slate-eq-caption>
+      <slate-workspace height="2.4in"></slate-workspace>
+
+      <slate-right>NTC Ambient Temperature&emsp;T<sub>NTC (ambient)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+      <slate-right>NTC Warm Temperature&emsp;T<sub>NTC (warm)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+    </slate-subquestion>
+    <slate-subquestion>
+      What happens when you hook up the NTC thermistor to the oscilloscope? Why?
+      <slate-freeform lines="2"></slate-freeform>
+    </slate-subquestion>
   </slate-question>
-  
 
 
-  <!-- ### QUESTION 3 ### -->
-  <slate-question points="1">
-    <slate-subquestion>Measure a Thermocouple with the oscope. Hold finger on it and observe it moving.</slate-subquestion>
-    <slate-subquestion>Heat it up with a soldering iron.</slate-subquestion>
-    <slate-subquestion>Try to get it to hold steady at some temperature.</slate-subquestion>
+
+  <!-- ### QUESTION 3: PTC ### -->
+  <slate-question points="0">
+    A <strong>Positive Temperature Coefficient (PTC) Thermistor</strong> operates very similar to a NTC thermistor, but with the opposite slope for temperature change.
+    <slate-subquestion>
+      Let's just take two measurements of the PTC thermistor at ambient and warm via fingers.
+      This time you should measure something around 300 &ohm;.
+      <slate-right>PTC Thermistor Ambient Resistance&emsp;R<sub>PTC (ambient)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+      <slate-right>PTC Thermistor Warm Resistance&emsp;R<sub>PTC (warm)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+    </slate-subquestion>
+    <slate-subquestion>
+      Describe the resistance of the PTC thermistor as temperature increases.
+      <slate-freeform lines="1"></slate-freeform>
+    </slate-subquestion>
+    <slate-subquestion>
+      The next step requires you to pay attention to your Ammeter at the moment you provide power to the circuit.
+      Hook up your PTC thermistor like in the circuit below.
+    </slate-subquestion>
+    <slate-diagram debug src="diagrams/ptc_circuit_ammeter.html" width="4in"></slate-diagram>
   </slate-question>
 
-  
 
-  <!-- ### QUESTION 4 ### -->
-  <slate-question points="1">
-    TODO
-    <slate-subquestion>Measure a RTD with a voltmeter and current source.</slate-question>
-    <slate-subquestion>Heat it up with a soldering iron.</slate-subquestion>
-    <slate-subquestion>Try to get it to hold steady at some temperature.</slate-subquestion>
+
+  <!-- ### QUESTION 4: RTD CONVERSION ### -->
+  <slate-question points="0">
+    TODO RTD, 2-wire, current source + DMM
+    <slate-subquestion>
+      measure V, calc R = V / I
+      <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+    <slate-subquestion>
+      alpha linear approx -&gt; temp (Pt100, &alpha;=0.00385 TODO confirm part)
+      <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+    <slate-subquestion>
+      polynomial calc -&gt; temp (coefficients TODO)
+      <slate-blank width="1.5in"></slate-blank>
+    </slate-subquestion>
+  </slate-question>
+
+
+
+  <!-- ### QUESTION 5: RTD 2-WIRE VS 4-WIRE ### -->
+  <slate-question points="0">
+    TODO RTD lead resistance error, 2-wire w/ series R vs true 4-wire
+
+    <slate-answer-row>
+      <slate-diagram src="diagrams/fourwire_resistance_measurement.html" width="300px"></slate-diagram>
+
+      <slate-answer-col>
+        <slate-subquestion>
+          2-wire + 10&Omega; series R inserted, measured R
+          <slate-blank width="1.5in"></slate-blank>
+        </slate-subquestion>
+        <slate-subquestion>
+          true 4-wire, measured R
+          <slate-blank width="1.5in"></slate-blank>
+        </slate-subquestion>
+        <slate-subquestion>
+          error between the two
+          <slate-blank width="1.5in"></slate-blank>
+        </slate-subquestion>
+      </slate-answer-col>
+    </slate-answer-row>
   </slate-question>
 
 
 
   <!-- ### SCORE ### -->
   <slate-score></slate-score>
+
+
+
+  <!-- ### APPENDIX A ###-->
+  <slate-pagebreak></slate-pagebreak>
+  <slate-section label="Appendix A"></slate-section>
+  <img src="images/TC_typeK_lookup.png" style="width:100%;">
 
 </slate-doc>
 

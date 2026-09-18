@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>EET 255 - Homework 1</title>
 <link rel="stylesheet" href="slate-shared.css">
+<script src="slate-version.js"></script>
 <script src="slate-shared.js" defer></script>
 </head>
 <body>
@@ -67,7 +68,7 @@
     </slate-subquestion>
     <slate-subquestion>
       (mean)&emsp;&mu; =
-      <span class="slate-frac"><span class="slate-frac-num">&Sigma; x<sub>i</sub></span><span class="slate-frac-den">N</span></span>
+      <slate-frac><slate-frac-num>&Sigma; x<sub>i</sub></slate-frac-num><slate-frac-den>N</slate-frac-den></slate-frac>
       = <span class="slate-hspace" style="width:3in;"></span> = <slate-blank width="2in"></slate-blank>
     </slate-subquestion>
 
@@ -101,7 +102,7 @@
     Typically the median would be the value in the middle of the data set (e.g. the 5th of 9 values). In a data set with an even number of values you take the average (mean) of the two middle values.
 
     <slate-subquestion>
-      (median)&emsp;Med = <span class="slate-frac"><span class="slate-frac-num">y<sub>5</sub> + y<sub>6</sub></span><span class="slate-frac-den">2</span></span> = <slate-blank width="2in"></slate-blank>
+      (median)&emsp;Med = <slate-frac><slate-frac-num>y<sub>5</sub> + y<sub>6</sub></slate-frac-num><slate-frac-den>2</slate-frac-den></slate-frac> = <slate-blank width="2in"></slate-blank>
     </slate-subquestion>
 
     Next you will calculate the standard deviation. Standard deviation is a measure of how "spread out" the data is from the mean. Go back to the "x" data set. Follow these steps.
@@ -138,13 +139,13 @@
     </slate-subquestion>
 
     <slate-subquestion>
-      (variance)&emsp;&sigma;<sup>2</sup> = <span class="slate-frac"><span class="slate-frac-num">&Sigma; d<sub>i</sub><sup>2</sup></span><span class="slate-frac-den">N</span></span>
+      (variance)&emsp;&sigma;<sup>2</sup> = <slate-frac><slate-frac-num>&Sigma; d<sub>i</sub><sup>2</sup></slate-frac-num><slate-frac-den>N</slate-frac-den></slate-frac>
       = <span class="slate-hspace" style="width:2.5in;"></span> = <slate-blank width="2in"></slate-blank>
     </slate-subquestion>
 
     <slate-subquestion>
       (standard deviation)&emsp;&sigma; = <span class="slate-radical">&sigma;<sup>2</sup></span>&nbsp;
-      = <span class="slate-radical"><span class="slate-frac"><span class="slate-frac-num">&Sigma; d<sub>i</sub><sup>2</sup></span><span class="slate-frac-den">N</span></span></span>
+      = <span class="slate-radical"><slate-frac><slate-frac-num>&Sigma; d<sub>i</sub><sup>2</sup></slate-frac-num><slate-frac-den>N</slate-frac-den></slate-frac></span>
       = <span class="slate-hspace" style="width:1.5in;"></span> = <slate-blank width="1.6in"></slate-blank>
     </slate-subquestion>
 
@@ -180,10 +181,7 @@
     <slate-space height="0.2in"></slate-space>
 
     <slate-answer-row>
-      <slate-diagram> <!-- Use "<slate-diagram debug>" to see border. -->
-        <iframe src="diagrams/voltage_divider.html" style="width:100%; max-width:300px; aspect-ratio:300/180;"
-                scrolling="no" title="Series circuit: 12 V source, R1, and R2"></iframe>
-      </slate-diagram>
+      <slate-diagram src="diagrams/voltage_divider.html" width="300px"></slate-diagram> <!-- Use "<slate-diagram debug>" to see border. -->
     </slate-answer-row>
 
     <slate-space height="0.4in"></slate-space>
@@ -247,10 +245,7 @@
     &bull; Your Voltmeter shows a measurement of&emsp;<strong>8.84 V</strong>&emsp;(depicted as the square with "V" in the circuit).
 
     <slate-answer-row>
-      <slate-diagram> <!-- Use "<slate-diagram debug>" to see border. -->
-        <iframe src="diagrams/twowire_resistance_measurement.html" style="width:320px; max-width:100%; aspect-ratio:400/200;"
-                scrolling="no" title="Series circuit: 12 V source, R1, and R2"></iframe>
-      </slate-diagram>
+      <slate-diagram src="diagrams/twowire_resistance_measurement.html" width="320px"></slate-diagram> <!-- Use "<slate-diagram debug>" to see border. -->
     </slate-answer-row>
 
     <slate-space height="0.5in"></slate-space>
@@ -283,10 +278,7 @@
 
     <slate-answer-row>
       <slate-answer-col>
-      <slate-diagram> <!-- Use "<slate-diagram debug>" to see border. -->
-        <iframe src="diagrams/fourwire_resistance_measurement.html" style="width:320px; max-width:100%; aspect-ratio:400/200;"
-                scrolling="no" title="Series circuit: 12 V source, R1, and R2"></iframe>
-      </slate-diagram>
+      <slate-diagram src="diagrams/fourwire_resistance_measurement.html" width="320px"></slate-diagram> <!-- Use "<slate-diagram debug>" to see border. -->
       </slate-answer-col>
       <slate-answer-col>
         <slate-subquestion>

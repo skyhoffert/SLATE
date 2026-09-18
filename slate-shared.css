@@ -4,9 +4,14 @@
   --slate-font-size: 12pt;
   --slate-line-height: 1.5;
   --slate-margin: 0.5in;
-  --slate-accent: #b30000;
+  --slate-accent: #c40000;
   --slate-rule-color: #999999;
   --slate-fl-line-height: 0.28in;
+  --slate-bg-color: #e8e8e8;
+  /* Clearance from the physical page edge for printed elements like the
+     footer - most printers can't print all the way to the edge and clip a
+     non-printable zone there, commonly 0.15-0.3in on consumer printers. */
+  --slate-print-safe-margin: 0.2in;
 }
 
 
@@ -20,13 +25,13 @@
 
 @page {
   size: 8.5in 11in;
-  margin: var(--slate-margin);
+  margin: 0;
 }
 
 html, body {
   margin: 0;
   padding: 0;
-  background: #e8e8e8;
+  background: var(--slate-bg-color);
 }
 
 body {
@@ -39,16 +44,45 @@ body {
 
 
 /* ### PAGE ### */
+/* slate-doc is just a layout shell; the actual pages are .slate-page boxes
+   built by paginateDoc() in slate-shared.js, which slices the authored
+   content into real, fixed-size (8.5in x 11in) page divs with a footer. */
 slate-doc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4in;
+  padding: 0.4in 0;
+}
+
+.slate-page {
   display: block;
+  position: relative;
   width: 8.5in;
-  min-height: 11in;
-  margin: 0.5in auto;
+  height: 11in;
   padding: var(--slate-margin);
   background: #ffffff;
   color: #000000;
   box-shadow: 0 0 0.15in rgba(0, 0, 0, 0.3);
-  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Pages are separate boxes now, not one flowing document, so a block's own
+   top margin no longer collapses with whatever preceded it when it lands
+   first on a page - it would just add onto the page's top padding. */
+.slate-page > *:first-child {
+  margin-top: 0;
+}
+
+.slate-page-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--slate-print-safe-margin);
+  text-align: center;
+  font-size: 0.75em;
+  color: #555555;
 }
 
 @media print {
@@ -56,30 +90,17 @@ slate-doc {
     background: #ffffff;
   }
   slate-doc {
-    width: auto;
-    min-height: auto;
-    margin: 0;
+    display: block;
     padding: 0;
-    box-shadow: none;
   }
-}
-
-
-
-/* ### PAGE BREAK MARKER ### */
-/* Screen-only preview line, injected by slate-shared.js, showing where content will split across printed pages. */
-.slate-pagebreak-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--slate-accent);
-  pointer-events: none;
-}
-
-@media print {
-  .slate-pagebreak-line {
-    display: none;
+  .slate-page {
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+  }
+  .slate-page:last-of-type {
+    break-after: auto;
+    page-break-after: auto;
   }
 }
 
@@ -179,11 +200,12 @@ slate-question {
 
 
 /* ### SUBQUESTIONS ### */
+/* paginateDoc() in slate-shared.js treats each slate-subquestion as an
+   atomic, unsplittable block when laying out .slate-page boxes, so there's
+   no browser reflow to constrain here. */
 slate-subquestion {
   display: block;
   margin: 0.12in 0 0.12in 0.35in;
-  break-inside: avoid;
-  page-break-inside: avoid;
 }
 
 .slate-subletter {
@@ -218,6 +240,21 @@ slate-freeform {
   display: block;
   height: var(--slate-fl-line-height);
   border-bottom: 1px solid var(--slate-rule-color);
+}
+
+
+
+/* ### WORKSPACE ### */
+/* Open bordered box for showing work, e.g. <slate-workspace></slate-workspace> or
+   <slate-workspace height="2in"></slate-workspace>. Spans the full width of its
+   container - the page, or a slate-answer-col when nested inside one. */
+slate-workspace {
+  display: block;
+  width: 100%;
+  min-height: 1.5in;
+  margin: 0.1in auto;
+  border: 1px solid #000000;
+  box-sizing: border-box;
 }
 
 
@@ -264,6 +301,15 @@ slate-diagram iframe {
   border: none;
 }
 
+/* slate-shared.js builds the actual <iframe> from <slate-diagram src=...>,
+   setting its aspect-ratio from the diagram's native Circuit(w, h) size so
+   it stays undistorted at any width (iframe has no intrinsic ratio of its
+   own the way img/video do, so this can't be inferred from attributes). */
+slate-diagram iframe {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Add a debug="" attribute to <slate-diagram> to show its bounding box, e.g. */
 /* <slate-diagram debug> ... </slate-diagram> */
 slate-diagram[debug] svg,
@@ -297,6 +343,16 @@ slate-space {
 
 
 
+/* ### PAGE BREAK (FORCED) ### */
+/* <slate-pagebreak></slate-pagebreak> - consumed by paginateDoc() in
+   slate-shared.js, which starts a new .slate-page at this point. Hidden in
+   case it's ever left in the DOM (e.g. paginateDoc didn't run). */
+slate-pagebreak {
+  display: none;
+}
+
+
+
 /* ### TABLE ### */
 /* <table class="slate-table"><tr><th>...</th></tr><tr><td>...</td></tr></table> */
 table.slate-table {
@@ -319,8 +375,8 @@ table.slate-table th {
   font-weight: bold;
 }
 
-/* Row-label column: first cell of a row, e.g. <th scope="row">Trial</th> */
-table.slate-table tr > *:first-child {
+/* Row-label column: a <th scope="row"> as the first cell of a row, e.g. <th scope="row">Trial</th> */
+table.slate-table tr > th[scope="row"]:first-child {
   text-align: left;
   background: #eeeeee;
   font-weight: bold;
@@ -329,6 +385,31 @@ table.slate-table tr > *:first-child {
 
 
 /* ### INLINE UTILITIES ### */
+/* Right-align a block, e.g. <slate-right>...</slate-right> */
+slate-right {
+  display: block;
+  text-align: right;
+  margin-top: 0.05in;
+}
+
+/* Equation styling: italic math font, e.g. <slate-eq>T = ...</slate-eq> */
+slate-eq {
+  font-family: 'Cambria Math', 'STIX Two Math', var(--slate-font-family);
+  font-style: italic;
+  font-size: 1.1em;
+}
+
+/* Caption under an equation, e.g. <slate-eq-caption>Interpolation formula</slate-eq-caption> */
+slate-eq-caption {
+  display: block;
+  text-align: center;
+  font-size: 0.8em;
+  font-style: italic;
+  color: #555555;
+  margin-top: 0.02in;
+  margin-bottom: 0.02in;
+}
+
 /* Emphasized inline note, e.g. <span class="slate-note">Use proper sig figs</span> */
 .slate-note {
   font-style: italic;
@@ -383,11 +464,11 @@ table.slate-table tr > *:first-child {
   transform: rotate(60deg);
 }
 
-/* Inline fraction: <span class="slate-frac"><span class="slate-frac-num">a</span><span class="slate-frac-den">b</span></span> */
-.slate-frac {
+/* Inline fraction: <slate-frac><slate-frac-num>a</slate-frac-num><slate-frac-den>b</slate-frac-den></slate-frac> */
+slate-frac {
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   vertical-align: middle;
   text-align: center;
   margin: 0 0.05in;
@@ -395,12 +476,14 @@ table.slate-table tr > *:first-child {
   line-height: 1.15;
 }
 
-.slate-frac-num {
+slate-frac-num {
+  display: block;
   padding: 0 0.05in 0.03in;
   border-bottom: 1px solid #000000;
 }
 
-.slate-frac-den {
+slate-frac-den {
+  display: block;
   padding: 0.03in 0.05in 0;
 }
 
