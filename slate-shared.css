@@ -214,6 +214,23 @@ slate-subquestion {
 
 
 
+/* ### LIST ### */
+/* <slate-list><slate-list-item>...</slate-list-item>...</slate-list> - numbered by slate-shared.js */
+slate-list {
+  display: block;
+  margin: 0.1in 0 0.1in 0.35in;
+}
+
+slate-list-item {
+  display: block;
+}
+
+.slate-listnum {
+  font-weight: bold;
+}
+
+
+
 /* ### BLANK ### */
 slate-blank {
   display: inline-block;
@@ -289,7 +306,7 @@ slate-answer-col slate-subquestion:first-child {
 /* ### DIAGRAM ### */
 slate-diagram {
   display: block;
-  margin: 0.2in auto;
+  margin: 0.1in auto;
   text-align: center;
 }
 

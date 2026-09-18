@@ -2,6 +2,8 @@
 
 # SLATE Specific Guidelines
 - Students are expected to put units for each answer - do not provide units as part of the question.
+- In general we prefer html elements which are slate-* rather than the standard <h2> <p> etc. elements.
+- The editor here is VS Code, which uses .vscode for managing repo settings, including autocomplete for custom slate-* elements.
 
 # General Understanding
 - If my instructions are unclear, you can utilize the grilling skill to get a better understanding.

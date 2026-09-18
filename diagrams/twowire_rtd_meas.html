@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Two-Wire RTD Measurement</title>
+<script src="../slate-circuit-lib.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<script>
+  const c = new Circuit(500, 300);
+
+  const isrc = c.ISource(380, 100, {
+    label: 'I_S',
+    value: '10 mA',
+    side: 'right',
+    anchor: 'middle',
+    labelGap: 50,
+    labelLineHeight: 22,
+    fontSize: 18,
+  });
+
+  const imeter = c.IMeter(350, 50, {
+    rotate: 90,
+    polarityOffset: -12,
+  });
+
+  const vmeter = c.VMeter(250, 100, {
+    fontSize: 18,
+  });
+
+  const rLead1 = c.resistor(120, 50, {
+    rotate: 0,
+    label: 'R_{Lead1}',
+    value: '1 Ω',
+    labelGap: 26,
+    labelLineHeight: 22,
+    fontSize: 18,
+  });
+
+  const rLead2 = c.resistor(120, 180, {
+    rotate: 0,
+    label: 'R_{Lead2}',
+    value: '1 Ω',
+    labelGap: 26,
+    labelLineHeight: 22,
+    fontSize: 18,
+  });
+  
+  const rRTD = c.resistor(10, 110, {
+    rotate: 90,
+    label: 'R_{RTD}',
+    labelGap: 12,
+    fontSize: 18,
+  });
+
+  c.wire(rRTD.top, rLead1.left, {bend:'v'});
+  c.wire(rRTD.bottom, rLead2.left, {bend:'v'});
+
+  c.wire(imeter.right, isrc.top);
+
+  c.render(document.body);
+</script>
+</body>
+</html>

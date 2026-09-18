@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="slate-version" content="20260918.1">
+<meta name="slate-version" content="20260918.2">
 <meta charset="UTF-8">
 <title>EET 255 - Lab X</title>
 <link rel="stylesheet" href="slate-shared.css">
 <script src="slate-version.js"></script>
+<script src="diagrams/slate-diagram-sizes.js"></script>
 <script src="slate-shared.js" defer></script>
 </head>
 <body>
@@ -272,19 +273,49 @@
     </slate-subquestion>
     <slate-subquestion>
       The next step requires you to pay attention to your Ammeter at the moment you provide power to the circuit.
-      Hook up your PTC thermistor like in the circuit below.
+      Hook up your PTC thermistor like in the circuit below, use the mA range. Record values below.
+      <slate-diagram src="diagrams/ptc_circuit_ammeter.html" width="3.8in"></slate-diagram>
+      <slate-eq-caption>PTC current measurement circuit.</slate-eq-caption>
+      <slate-right>PTC Thermistor Current, Initially&emsp;I<sub>PTC (initial)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+      <slate-right>PTC Thermistor Current, Steady State&emsp;I<sub>PTC (steady)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
     </slate-subquestion>
-    <slate-diagram debug src="diagrams/ptc_circuit_ammeter.html" width="4in"></slate-diagram>
+    <slate-subquestion>
+      What happens to the current over time? How long does it take to change?
+      <slate-freeform lines="2" ></slate-freeform>
+    </slate-subquestion>
+    <slate-subquestion>
+      Using your initial current, calculate how much power is dissipated in the PTC thermistor.
+      Assume the Ammeter is ideal i.e. 0 &ohm; internal resistance.
+      <slate-right>PTC Thermistor Power, Initially&emsp;P<sub>PTC (initial)</sub> = <slate-blank width="1.5in"></slate-blank></slate-right>
+    </slate-subquestion>
+    <slate-subquestion>
+      This is a common configuration for a PTC in a circuit. Why do you think this might be useful?
+      <slate-freeform lines="2"></slate-freeform>
+    </slate-subquestion>
   </slate-question>
 
 
 
   <!-- ### QUESTION 4: RTD CONVERSION ### -->
   <slate-question points="0">
-    TODO RTD, 2-wire, current source + DMM
+    The final sensor is a <strong>Resistance Temperature Detector (RTD)</strong>.
+    An RTD is very similar to a thermistor, but it typically is used for applications with the most required precision.
+    For these measurements, we will experiment with using more than 2 leads for more accurate measurements, which is common in this area.
     <slate-subquestion>
-      measure V, calc R = V / I
-      <slate-blank width="1.5in"></slate-blank>
+      Configure your DC Power Supply as a current source by following these steps:
+      <slate-list>
+        <slate-list-item>Push the CUR-ADJ CC/CV button so the green LED is ON.</slate-list-item>
+        <slate-list-item>Set the output to 1 Volt.</slate-list-item>
+        <slate-list-item>Short the + and - outputs together with a banana plug.</slate-list-item>
+        <slate-list-item>Push the CUR-ADJ DOWN button until the output reads 0.01 Amps.</slate-list-item>
+        <slate-list-item>Remove the short.</slate-list-item>
+      </slate-list>
+    </slate-subquestion>
+    <slate-subquestion>
+      We will be using small resistances to simulate a long cable connection from the measurement circuitry to the RTD.
+      There are many applications which could have 20+ feet of wire to an RTD sensor.
+      Configure your circuit according to the digram below.
+      <slate-diagram debug src="diagrams/twowire_rtd_meas.html" width="4in"></slate-diagram>
     </slate-subquestion>
     <slate-subquestion>
       alpha linear approx -&gt; temp (Pt100, &alpha;=0.00385 TODO confirm part)

@@ -4,7 +4,7 @@ Student Lab/Assignment Template Engine. Generates printable course assignments (
 
 ## How it works
 
-Each assignment is a standalone `.html` file built from shared custom elements (`slate-doc`, `slate-header`, `slate-question`, `slate-subquestion`, `slate-blank`, `slate-diagram`, `slate-section`, `slate-boxnote`, ...), styled by `slate-shared.css` and auto-numbered/scored by `slate-shared.js`. See `example.html` for an annotated reference of every element.
+Each assignment is a standalone `.html` file built from shared custom elements (`slate-doc`, `slate-header`, `slate-question`, `slate-subquestion`, `slate-blank`, `slate-diagram`, `slate-section`, `slate-boxnote`, `slate-list`, ...), styled by `slate-shared.css` and auto-numbered/scored by `slate-shared.js`. See `example.html` for an annotated reference of every element.
 
 Circuit diagrams live in `diagrams/`, built with `slate-circuit-lib.js` and embedded via iframe.
 

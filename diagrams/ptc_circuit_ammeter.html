@@ -11,7 +11,7 @@
 </head>
 <body>
 <script>
-  const c = new Circuit(300, 150);
+  const c = new Circuit(250, 130);
 
   const vs = c.VSource(60, 50, {
     label: 'V_S',
@@ -31,7 +31,6 @@
   });
   
   const imeter = c.IMeter(125, 110, {
-    label: 'A',
     fontSize: 18,
     rotate: 90,
     labelGap: 0,

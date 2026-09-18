@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   checkSlateVersion();
   numberQuestions();
   letterSubquestions();
+  numberListItems();
   applyBlankWidths();
   applyFreeformLines();
   applyWorkspaceHeights();
@@ -89,6 +90,21 @@ function letterSubquestions() {
 
 
 
+// ### NUMBER LIST ITEMS ###
+function numberListItems() {
+  document.querySelectorAll('slate-list').forEach((l) => {
+    const items = l.querySelectorAll('slate-list-item');
+    items.forEach((item, i) => {
+      const span = document.createElement('span');
+      span.className = 'slate-listnum';
+      span.textContent = (i + 1) + '. ';
+      item.insertBefore(span, item.firstChild);
+    });
+  });
+}
+
+
+
 // ### APPLY BLANK WIDTHS ###
 function applyBlankWidths() {
   document.querySelectorAll('slate-blank').forEach((b) => {
@@ -154,17 +170,8 @@ function applyChecklistCols() {
 
 
 // ### BUILD DIAGRAM FRAMES ###
-// Native pixel size of each diagrams/*.html file, i.e. the (w, h) passed to
-// `new Circuit(w, h)` in that file - add an entry here whenever a new
-// diagram is created so <slate-diagram src="..."> knows its aspect ratio
-// without needing same-origin access into the iframe (which file:// blocks).
-const DIAGRAM_SIZES = {
-  'diagrams/ptc_circuit_ammeter.html': [300, 150],
-  'diagrams/fourwire_resistance_measurement.html': [400, 300],
-  'diagrams/voltage_divider.html': [305, 180],
-  'diagrams/rc_network.html': [400, 180],
-  'diagrams/twowire_resistance_measurement.html': [400, 200],
-};
+// DIAGRAM_SIZES comes from diagrams/slate-diagram-sizes.js, loaded before
+// this file.
 
 function buildDiagramFrames() {
   document.querySelectorAll('slate-diagram[src]').forEach((d) => {
@@ -172,7 +179,7 @@ function buildDiagramFrames() {
     const width = d.getAttribute('width') || '320px';
     const size = DIAGRAM_SIZES[src];
     if (!size) {
-      console.warn(`slate-diagram: no native size registered for "${src}" - add it to DIAGRAM_SIZES in slate-shared.js`);
+      alert(`slate-diagram: no native size registered for "${src}" - add it to DIAGRAM_SIZES in diagrams/slate-diagram-sizes.js`);
       return;
     }
 

@@ -128,6 +128,14 @@
     {
       "name": "slate-frac-den",
       "description": "Denominator of a slate-frac."
+    },
+    {
+      "name": "slate-list",
+      "description": "Wrapper for a numbered (1, 2, 3, ...) list of steps, e.g. procedural instructions. Auto-numbered by slate-shared.js."
+    },
+    {
+      "name": "slate-list-item",
+      "description": "Single item inside a slate-list."
     }
   ]
 }

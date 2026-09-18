@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="slate-version" content="20260918.1">
+<meta name="slate-version" content="20260918.2">
 <meta charset="UTF-8">
 <title>Slate Element Reference</title>
 <link rel="stylesheet" href="slate-shared.css">
 <script src="slate-version.js"></script>
+<script src="diagrams/slate-diagram-sizes.js"></script>
 <script src="slate-shared.js" defer></script>
 </head>
 <body>
@@ -112,6 +113,20 @@
   </slate-question>
 
 
+  <!--
+    ### LIST ###
+    slate-list + slate-list-item: a numbered (1, 2, 3, ...) list of steps,
+    e.g. for procedural instructions. Auto-numbered by slate-shared.js.
+  -->
+  <slate-question points="0">
+    Configure the instrument by following these steps:
+    <slate-list>
+      <slate-list-item>Push the CUR-ADJ CC/CV button so the green LED is ON.</slate-list-item>
+      <slate-list-item>Set the output to 1 Volt.</slate-list-item>
+      <slate-list-item>Short the - and + outputs together with a banana plug.</slate-list-item>
+    </slate-list>
+  </slate-question>
+
 
   <!--
     ### QUESTION: FREEFORM ###
@@ -157,8 +172,8 @@
       see diagrams/fourwire_resistance_measurement.html for a worked example
       of resistor/VSource/wire/label usage). `width` picks the display size
       (defaults to 320px); aspect ratio is handled automatically from a
-      registry in slate-shared.js (DIAGRAM_SIZES) - add a new diagram's
-      native `Circuit(w, h)` size there when you create the file.
+      registry in diagrams/slate-diagram-sizes.js (DIAGRAM_SIZES) - run
+      diagrams/update-diagram-sizes.sh to keep it in sync with the files.
     - Add a debug attribute (<slate-diagram debug src="..." width="...">) to
       show the diagram's bounding box border while you're tuning
       layout/coordinates.
